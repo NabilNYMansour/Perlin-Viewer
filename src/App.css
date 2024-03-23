@@ -1,0 +1,39 @@
+@font-face {
+  font-family: 'Caviar-Dreams';
+  src: url('/public/Caviar-Dreams.ttf.woff') format('woff'),
+    url('/public/Caviar-Dreams.ttf.svg#Caviar-Dreams') format('svg'),
+    url('/public/Caviar-Dreams.ttf.eot'),
+    url('/public/Caviar-Dreams.ttf.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,
+body,
+#app,
+#app>div {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #282c34;
+  font-family: 'Caviar-Dreams';
+}
+
+.main {
+  height: 100vh;
+  display: flex;
+}
+
+.canvas-container {
+  flex-grow: 4;
+}
+
+.settings {
+  color: white;
+  padding: 5vw;
+  font-size: 3em;
+  letter-spacing: 0.5em;
+  text-align: center;
+}
