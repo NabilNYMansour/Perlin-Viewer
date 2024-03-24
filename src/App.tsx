@@ -2,12 +2,17 @@ import { useEffect, useState } from 'react';
 import './App.css'
 import Scene from './components/scene'
 import Settings from './components/settings'
+import { Vector3 } from 'three';
+import { rgbStringToVector3 } from './utils/utils';
+import { DEFUALT_SETTINGS } from './constants';
 
 function App() {
-  const [size, setSize] = useState<number>(5);
-  const [segments, setSegments] = useState<number>(5);
-  const [wireframeMode, setWireframeMode] = useState<boolean>(true);
-  const [noiseLod, setNoiseLod] = useState<0 | 1 | 2>(0);
+  const [size, setSize] = useState<number>(DEFUALT_SETTINGS.size);
+  const [segments, setSegments] = useState<number>(DEFUALT_SETTINGS.segments);
+  const [wireframeMode, setWireframeMode] = useState<boolean>(DEFUALT_SETTINGS.wireframeMode);
+  const [noiseLod, setNoiseLod] = useState<0 | 1 | 2 | 3>(DEFUALT_SETTINGS.noiseLod as 0 | 1 | 2 | 3);
+  const [noiseOffset, setNoiseOffset] = useState<number>(DEFUALT_SETTINGS.noiseOffset);
+  const [colors, setColors] = useState<Vector3[]>(DEFUALT_SETTINGS.colors);
 
   useEffect(() => {
     const localStorageSize = localStorage.getItem('size');
@@ -27,18 +32,30 @@ function App() {
 
     const localStorageNoiseLod = localStorage.getItem('noiseLod');
     if (localStorageNoiseLod) {
-      setNoiseLod(Number(localStorageNoiseLod) as 0 | 1 | 2)
+      setNoiseLod(Number(localStorageNoiseLod) as 0 | 1 | 2 | 3)
     }
-  }, [])
 
+    const localStorageNoiseOffset = localStorage.getItem('noiseOffset');
+    if (localStorageNoiseOffset) {
+      setNoiseOffset(Number(localStorageNoiseOffset))
+    }
 
+    const localStorageCol1 = localStorage.getItem('col1');
+    const localStorageCol2 = localStorage.getItem('col2');
+    if (localStorageCol1 && localStorageCol2) {
+      setColors([localStorageCol1, localStorageCol2].map((val) => rgbStringToVector3(val)));
+    }
+  }, []);
 
   return (
     <div className='main'>
       <Settings
-        setSize={setSize} setSegments={setSegments} setWireframeMode={setWireframeMode} setNoiseLod={setNoiseLod}
-        size={size} segments={segments} wireframeMode={wireframeMode} noiseLod={noiseLod} />
-      <Scene size={size} segments={segments} wireframeMode={wireframeMode} noiseLod={noiseLod} />
+        setSize={setSize} setSegments={setSegments} setWireframeMode={setWireframeMode}
+        setNoiseLod={setNoiseLod} setNoiseOffset={setNoiseOffset} setColors={setColors}
+        size={size} segments={segments} wireframeMode={wireframeMode}
+        noiseLod={noiseLod} noiseOffset={noiseOffset} colors={colors} />
+      <Scene size={size} segments={segments} wireframeMode={wireframeMode}
+        noiseLod={noiseLod} noiseOffset={noiseOffset} colors={colors} />
     </div>
   )
 }

@@ -1,25 +1,19 @@
 import { OrbitControls } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { DoubleSide, Mesh, PlaneGeometry, ShaderMaterial } from 'three';
-import { Stats } from '@react-three/drei';
+import { Canvas } from "@react-three/fiber";
+import PlaneMesh from "./planeMesh";
+import { useEffect, useState } from "react";
+import { CircularProgress } from "@mui/material";
+import { Vector3 } from "three";
 
-export const Scene = ({ size, segments, wireframeMode, noiseLod }:
-  { size: number, segments: number, wireframeMode: boolean, noiseLod: 0 | 1 | 2 }
+export const Scene = ({ size, segments, wireframeMode, noiseLod, noiseOffset, colors }:
+  { size: number, segments: number, wireframeMode: boolean, noiseLod: 0 | 1 | 2 | 3, noiseOffset: number, colors: Vector3[] }
 ) => {
+  // Shader code states
   const [perlinCode, setPerlinCode] = useState<string>('');
   const [vertCode, setVertCode] = useState<string>('');
   const [fragCode, setFragCode] = useState<string>('');
 
-  const uniforms = useMemo(() => {
-    return {
-      u_lod: {
-        type: 'i',
-        value: noiseLod,
-      },
-    };
-  }, [noiseLod]);
-
+  // Get shaders code
   useEffect(() => {
     const fetchFrag = async (url: string, setFunc: React.Dispatch<React.SetStateAction<string>>) => {
       try {
@@ -36,39 +30,24 @@ export const Scene = ({ size, segments, wireframeMode, noiseLod }:
     fetchFrag('/frag.glsl', setFragCode);
   }, []);
 
-  const planeGeom = useMemo(() => new PlaneGeometry(size, size, segments, segments),
-    [size, segments]
-  );
-
-  const planeMat = useMemo(() => // could be recompiling shadercode!
-    new ShaderMaterial({
-      uniforms: uniforms,
-      vertexShader: perlinCode + vertCode,
-      fragmentShader: fragCode,
-      wireframe: wireframeMode,
-      side: DoubleSide
-    }), [uniforms, perlinCode, vertCode, fragCode, wireframeMode]
-  );
-
-  // const meshRef = useRef<Mesh>(null);
-
-  // useFrame((state) => {
-  //   if (meshRef.current && meshRef.current.material) {
-  //     // Update the uniforms of the shader material
-  //     meshRef.current.material.uniforms.u_lod.value = noiseLod;
-  //     meshRef.current.material.uniformsNeedUpdate = true;
-  //   }
-  // });
-
-  return <div className="canvas-container">
-    <Canvas camera={{ position: [0, 0, 30], fov: 17.5, near: 1, far: 200 }}>
-      <OrbitControls target={[0, 0, 0]} maxDistance={100} minDistance={10} />
-      {/* <ambientLight intensity={0.05} /> */}
-      {/* <directionalLight position={[1, 1, 1]} /> */}
-      <mesh geometry={planeGeom} material={planeMat} />
-      <Stats className="stats" />
-    </Canvas>
-  </div>
+  return <>
+    {perlinCode && vertCode && fragCode ? // to make sure shader code is loaded 
+      <div className="canvas-container">
+        <Canvas camera={{ position: [0, 0, 30], fov: 17.5, near: 1, far: 200 }}>
+          <OrbitControls target={[0, 0, 0]} maxDistance={100} minDistance={10}/>
+          <PlaneMesh perlinCode={perlinCode} vertCode={vertCode} fragCode={fragCode}
+            size={size} segments={segments} wireframeMode={wireframeMode} 
+            noiseLod={noiseLod} noiseOffset={noiseOffset} colors={colors} />
+        </Canvas>
+      </div>
+      :
+      // if shader code is not loaded yet, show progress
+      <div className="loading">
+        LOADING
+        <CircularProgress size={60}/>
+      </div>
+    }
+  </>
 }
 
 
