@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'Caviar-Dreams';
-  src: url('/public/Caviar-Dreams.ttf.woff') format('woff'),
-    url('/public/Caviar-Dreams.ttf.svg#Caviar-Dreams') format('svg'),
-    url('/public/Caviar-Dreams.ttf.eot'),
-    url('/public/Caviar-Dreams.ttf.eot?#iefix') format('embedded-opentype');
+  src: url('/Caviar-Dreams.ttf.woff') format('woff'),
+    url('/Caviar-Dreams.ttf.svg#Caviar-Dreams') format('svg'),
+    url('/Caviar-Dreams.ttf.eot'),
+    url('/Caviar-Dreams.ttf.eot?#iefix') format('embedded-opentype');
   font-weight: normal;
   font-style: normal;
 }
@@ -30,10 +30,41 @@ body,
   flex-grow: 4;
 }
 
-.settings {
-  color: white;
-  padding: 5vw;
+.title {
   font-size: 3em;
   letter-spacing: 0.5em;
+  padding-bottom: 5vw;
+  font-weight: normal;
+  display: flex;
+}
+
+.setting {
+  font-size: 1.35em;
+  letter-spacing: 0.2em;
+  font-weight: normal;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 5px;
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-bar {
+  padding: 2vw;
+  max-width: 15vw;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.stats {
+  display: flex;
+  width: 100vw;
+  justify-content: right;
 }
