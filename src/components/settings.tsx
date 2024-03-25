@@ -60,7 +60,7 @@ export const Settings = ({ setSize, setSegments, setWireframeMode, setNoiseLod, 
                     max={150}
                 />
             </Paper>
-
+            
             {/* ---------------- Noise LOD ---------------- */}
             <Paper elevation={2} className="setting">
                 Noise LOD
@@ -131,7 +131,7 @@ export const Settings = ({ setSize, setSegments, setWireframeMode, setNoiseLod, 
             </Paper>
             {/* ---------------- Reset ---------------- */}
             <Button
-                style={{ fontFamily: 'Caviar-Dreams', fontWeight: "bolder" }}
+                style={{ fontFamily: 'Caviar-Dreams', fontWeight: "bolder", alignSelf: "center" }}
                 variant="contained"
                 size="large"
                 onClick={() => {

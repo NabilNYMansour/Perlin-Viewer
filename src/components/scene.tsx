@@ -33,18 +33,19 @@ export const Scene = ({ size, segments, wireframeMode, noiseLod, noiseOffset, co
   return <>
     {perlinCode && vertCode && fragCode ? // to make sure shader code is loaded 
       <div className="canvas-container">
-        <Canvas camera={{ position: [0, 0, 30], fov: 17.5, near: 1, far: 200 }}>
-          <OrbitControls target={[0, 0, 0]} maxDistance={100} minDistance={10}/>
+        <Canvas camera={{ position: [5, -30, 22], fov: 17.5, near: 1, far: 200 }}>
+          <OrbitControls target={[0, 0, 0]} maxDistance={100} minDistance={10} />
           <PlaneMesh perlinCode={perlinCode} vertCode={vertCode} fragCode={fragCode}
-            size={size} segments={segments} wireframeMode={wireframeMode} 
+            size={size} segments={segments} wireframeMode={wireframeMode}
             noiseLod={noiseLod} noiseOffset={noiseOffset} colors={colors} />
         </Canvas>
+
       </div>
       :
       // if shader code is not loaded yet, show progress
       <div className="loading">
         LOADING
-        <CircularProgress size={60}/>
+        <CircularProgress size={60} />
       </div>
     }
   </>

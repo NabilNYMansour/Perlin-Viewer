@@ -22,12 +22,46 @@ body,
 }
 
 .main {
+  width: 100vw;
   height: 100vh;
   display: flex;
+  justify-content: center;
 }
 
 .canvas-container {
-  flex-grow: 4;
+  width: 80vw;
+  height: 100vh;
+  align-self: center;
+}
+
+.right-bar {
+  padding: 1vw;
+  width: 20vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  align-items: center;
+}
+
+.sceneFooter {
+  color: white;
+  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.sceneButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5em;
 }
 
 .loading {
@@ -45,6 +79,7 @@ body,
   letter-spacing: 0.5em;
   font-weight: normal;
   display: flex;
+  justify-content: center;
 }
 
 .setting {
@@ -64,16 +99,65 @@ body,
   flex-direction: column;
 }
 
-.right-bar {
-  padding: 2vw;
-  max-width: 15vw;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
+@media (max-aspect-ratio: 4/3) {
+
+  html,
+  body,
+  #app,
+  #app>div {
+    font-size: 0.9em;
+  }
+
+  .canvas-container {
+    width: 60vw;
+    height: 50vh;
+  }
+
+  .right-bar {
+    width: 40vw;
+  }
+
 }
 
-.stats {
-  display: flex;
-  width: 100vw;
-  justify-content: right;
+
+@media screen and (max-height: 915px) {
+
+  html,
+  body,
+  #app,
+  #app>div {
+    font-size: 0.9em;
+  }
+
+  .canvas-container {
+    width: 60vw;
+    height: 50vh;
+  }
+
+  .right-bar {
+    width: 40vw;
+  }
+}
+
+
+@media (max-aspect-ratio: 3/4) {
+  .main {
+    flex-direction: column;
+  }
+
+  .canvas-container {
+    width: 100vw;
+    height: 70vh;
+  }
+
+  .right-bar {
+    width: 100vw;
+    height: 30vh;
+  }
+
+  .sceneFooter {
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
 }

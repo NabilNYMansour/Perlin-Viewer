@@ -66,7 +66,7 @@ export const PlaneMesh = ({ size, segments, wireframeMode, noiseLod, noiseOffset
         if (meshRef.current && meshRef.current.material) {
             (meshRef.current.material as ShaderMaterial).wireframe = wireframeMode;
         }
-    }, [wireframeMode])
+    }, [wireframeMode]);
 
     return <mesh geometry={planeGeom} material={planeMat} ref={meshRef} />
 }
