@@ -25,9 +25,9 @@ export const Scene = ({ size, segments, wireframeMode, noiseLod, noiseOffset, co
       }
     };
 
-    fetchFrag('/perlin.glsl', setPerlinCode);
-    fetchFrag('/vert.glsl', setVertCode);
-    fetchFrag('/frag.glsl', setFragCode);
+    fetchFrag('./perlin.glsl', setPerlinCode);
+    fetchFrag('./vert.glsl', setVertCode);
+    fetchFrag('./frag.glsl', setFragCode);
   }, []);
 
   // check if using phone
