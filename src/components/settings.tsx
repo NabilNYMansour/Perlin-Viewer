@@ -144,7 +144,7 @@ export const Settings = ({ setSize, setSegments, setWireframeMode, setNoiseLod, 
                     setColors(DEFUALT_SETTINGS.colors);
                 }}
             >
-                Reset Setting
+                Reset Settings
             </Button>
         </div>
     </Paper>

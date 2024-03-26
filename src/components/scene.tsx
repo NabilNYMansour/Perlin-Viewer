@@ -2,7 +2,7 @@ import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import PlaneMesh from "./planeMesh";
 import { useEffect, useState } from "react";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, useMediaQuery } from "@mui/material";
 import { Vector3 } from "three";
 
 export const Scene = ({ size, segments, wireframeMode, noiseLod, noiseOffset, colors }:
@@ -30,16 +30,18 @@ export const Scene = ({ size, segments, wireframeMode, noiseLod, noiseOffset, co
     fetchFrag('/frag.glsl', setFragCode);
   }, []);
 
+  // check if using phone
+  const usingPhone = useMediaQuery('(max-aspect-ratio: 3/4)');
+
   return <>
     {perlinCode && vertCode && fragCode ? // to make sure shader code is loaded 
       <div className="canvas-container">
-        <Canvas camera={{ position: [5, -30, 22], fov: 17.5, near: 1, far: 200 }}>
+        <Canvas camera={{ position: usingPhone ? [10, -60, 44] : [5, -30, 22], fov: 17.5, near: 1, far: 200 }}>
           <OrbitControls target={[0, 0, 0]} maxDistance={100} minDistance={10} />
           <PlaneMesh perlinCode={perlinCode} vertCode={vertCode} fragCode={fragCode}
             size={size} segments={segments} wireframeMode={wireframeMode}
             noiseLod={noiseLod} noiseOffset={noiseOffset} colors={colors} />
         </Canvas>
-
       </div>
       :
       // if shader code is not loaded yet, show progress

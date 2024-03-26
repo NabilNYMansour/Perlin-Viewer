@@ -66,6 +66,8 @@ body,
 
 .loading {
   flex-grow: 4;
+  width: 80vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,7 +77,7 @@ body,
 }
 
 .title {
-  font-size: 3em;
+  font-size: 2.85em;
   letter-spacing: 0.5em;
   font-weight: normal;
   display: flex;
@@ -110,13 +112,20 @@ body,
 
   .canvas-container {
     width: 60vw;
-    height: 50vh;
+  }
+
+  .loading {
+    width: 60vw;
   }
 
   .right-bar {
     width: 40vw;
   }
 
+  .settings {
+    align-items: center;
+    margin-bottom: 100px;
+  }
 }
 
 
@@ -131,33 +140,57 @@ body,
 
   .canvas-container {
     width: 60vw;
-    height: 50vh;
+  }
+
+  .loading {
+    width: 60vw;
   }
 
   .right-bar {
     width: 40vw;
+  }
+
+  .settings {
+    align-items: center;
+    margin-bottom: 100px;
   }
 }
 
 
 @media (max-aspect-ratio: 3/4) {
   .main {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 
   .canvas-container {
     width: 100vw;
-    height: 70vh;
+    height: 100vh;
+  }
+
+  .loading {
+    width: 100vw;
   }
 
   .right-bar {
     width: 100vw;
-    height: 30vh;
+    height: 100vh;
   }
 
   .sceneFooter {
-    bottom: 0;
+    bottom: auto;
+    top: 0;
     right: 0;
     left: 0;
+  }
+
+  .settings {
+    align-items: center;
+    margin-bottom: 100px;
+  }
+
+  .settings-button {
+    position: absolute;
+    bottom: 0;
+    z-index: 100;
   }
 }
