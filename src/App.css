@@ -82,6 +82,15 @@ body,
   font-weight: normal;
   display: flex;
   justify-content: center;
+  margin-bottom: 0;
+}
+
+.sub-title {
+  font-size: 1em;
+  padding-bottom: 20px;
+  padding-top: 2px;
+  display: flex;
+  justify-content: center;
 }
 
 .setting {
@@ -101,7 +110,7 @@ body,
   flex-direction: column;
 }
 
-@media (max-aspect-ratio: 4/3) {
+@media (max-aspect-ratio: 3/2) {
 
   html,
   body,
@@ -185,7 +194,7 @@ body,
 
   .settings {
     align-items: center;
-    margin-bottom: 100px;
+    margin-bottom: 130px;
   }
 
   .settings-button {

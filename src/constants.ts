@@ -11,7 +11,8 @@ export const DEFUALT_SETTINGS = {
 
 export const LINKS = {
     personalWebsite: 'https://nabilmansour.com/',
-    githubRepo: 'https://github.com/NabilNYMansour/Perlin-Viewer'
+    githubRepo: 'https://github.com/NabilNYMansour/Perlin-Viewer',
+    wiki: 'https://en.wikipedia.org/wiki/Perlin_noise'
 }
 
 export const FOOTER_SCENE_BUTTONS_SYLE = {

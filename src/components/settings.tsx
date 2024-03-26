@@ -3,7 +3,7 @@ import { MuiColorInput } from "mui-color-input";
 import { useEffect, useState } from "react";
 import { Vector3 } from "three";
 import { rgbStringToVector3, vector3ToRgbString } from "../utils/utils";
-import { DEFUALT_SETTINGS } from "../constants";
+import { DEFUALT_SETTINGS, LINKS } from "../constants";
 
 export const Settings = ({ setSize, setSegments, setWireframeMode, setNoiseLod, setNoiseOffset, setColors,
     size, segments, wireframeMode, noiseLod, noiseOffset, colors }: {
@@ -25,6 +25,14 @@ export const Settings = ({ setSize, setSegments, setWireframeMode, setNoiseLod, 
 
     return <Paper elevation={1} className="right-bar">
         <h1 className="title">PERLIN VIEWER</h1>
+        {/* ---------------- Wiki link ---------------- */}
+        <Button
+            style={{ fontFamily: 'Caviar-Dreams', fontWeight: "bolder", alignSelf: "center" }}
+            variant="text" size="small"
+            href={LINKS.wiki} target="_blank" rel="noreferrer">
+            What is it?
+        </Button>
+
         <div className="settings">
             {/* ---------------- Plane Size ---------------- */}
             <Paper elevation={2} className="setting">
@@ -60,7 +68,7 @@ export const Settings = ({ setSize, setSegments, setWireframeMode, setNoiseLod, 
                     max={150}
                 />
             </Paper>
-            
+
             {/* ---------------- Noise LOD ---------------- */}
             <Paper elevation={2} className="setting">
                 Noise LOD
@@ -129,7 +137,10 @@ export const Settings = ({ setSize, setSegments, setWireframeMode, setNoiseLod, 
                         localStorage.setItem('col2', val);
                     }} />
             </Paper>
-            {/* ---------------- Reset ---------------- */}
+            {/* ---------------- Reset and Note ---------------- */}
+            <div className="sub-title">
+                Changes are applied automatically
+            </div>
             <Button
                 style={{ fontFamily: 'Caviar-Dreams', fontWeight: "bolder", alignSelf: "center" }}
                 variant="contained"

@@ -8,7 +8,7 @@ import { DEFUALT_SETTINGS, FOOTER_SCENE_BUTTONS_SYLE, LINKS } from './constants'
 import { Button, IconButton, useMediaQuery } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import SettingsIcon from '@mui/icons-material/Settings';
-import CloseIcon from '@mui/icons-material/Close';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function App() {
   const [size, setSize] = useState<number>(DEFUALT_SETTINGS.size);
@@ -18,7 +18,7 @@ function App() {
   const [noiseOffset, setNoiseOffset] = useState<number>(DEFUALT_SETTINGS.noiseOffset);
   const [colors, setColors] = useState<Vector3[]>(DEFUALT_SETTINGS.colors);
 
-  const [showSettings, setShowSettings] = useState<boolean>(false);
+  const [showSettings, setShowSettings] = useState<boolean>(false); // for phone
 
   useEffect(() => {
     const localStorageSize = localStorage.getItem('size');
@@ -53,7 +53,7 @@ function App() {
     }
   }, []);
 
-  const isPhone = useMediaQuery('(max-aspect-ratio: 3/4)');
+  const isPhone = useMediaQuery('(max-aspect-ratio: 3/4)'); // to check if using phone
 
   return (
     <div className='main'>
@@ -63,20 +63,18 @@ function App() {
             setShowSettings(!showSettings);
           }}>
             {showSettings ?
-              <CloseIcon fontSize='large' /> :
+              <ArrowBackIcon fontSize='large' /> :
               <SettingsIcon fontSize='large' />
             }
           </IconButton>
+          {showSettings ? null : "Settings"}
         </div> : null}
-      {
-        (isPhone && showSettings) || !isPhone ?
-          <Settings
-            setSize={setSize} setSegments={setSegments} setWireframeMode={setWireframeMode}
-            setNoiseLod={setNoiseLod} setNoiseOffset={setNoiseOffset} setColors={setColors}
-            size={size} segments={segments} wireframeMode={wireframeMode}
-            noiseLod={noiseLod} noiseOffset={noiseOffset} colors={colors} /> : null
-      }
-
+      {(isPhone && showSettings) || !isPhone ?
+        <Settings
+          setSize={setSize} setSegments={setSegments} setWireframeMode={setWireframeMode}
+          setNoiseLod={setNoiseLod} setNoiseOffset={setNoiseOffset} setColors={setColors}
+          size={size} segments={segments} wireframeMode={wireframeMode}
+          noiseLod={noiseLod} noiseOffset={noiseOffset} colors={colors} /> : null}
       <div style={{ display: (isPhone && !showSettings) || !isPhone ? "block" : "none" }}>
         <Scene size={size} segments={segments} wireframeMode={wireframeMode}
           noiseLod={noiseLod} noiseOffset={noiseOffset} colors={colors} />
