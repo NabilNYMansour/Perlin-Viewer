@@ -6,9 +6,9 @@ import { Vector3 } from 'three';
 import { rgbStringToVector3 } from './utils/utils';
 import { DEFUALT_SETTINGS, FOOTER_SCENE_BUTTONS_SYLE, LINKS } from './constants';
 import { Button, IconButton, useMediaQuery } from '@mui/material';
-import GitHubIcon from '@mui/icons-material/GitHub';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import SceneFooter from './components/sceneFooter';
 
 function App() {
   const [size, setSize] = useState<number>(DEFUALT_SETTINGS.size);
@@ -57,6 +57,7 @@ function App() {
 
   return (
     <div className='main'>
+      {/* ---------------- Settings ---------------- */}
       {isPhone ?
         <div className='settings-button' style={{ color: showSettings ? "#1769aa" : "white" }}>
           <IconButton color="inherit" onClick={() => {
@@ -75,25 +76,12 @@ function App() {
           setNoiseLod={setNoiseLod} setNoiseOffset={setNoiseOffset} setColors={setColors}
           size={size} segments={segments} wireframeMode={wireframeMode}
           noiseLod={noiseLod} noiseOffset={noiseOffset} colors={colors} /> : null}
+
+      {/* ---------------- Scene ---------------- */}
       <div style={{ display: (isPhone && !showSettings) || !isPhone ? "block" : "none" }}>
         <Scene size={size} segments={segments} wireframeMode={wireframeMode}
           noiseLod={noiseLod} noiseOffset={noiseOffset} colors={colors} />
-        <footer className='sceneFooter'>
-          <div className='sceneButtons'>
-            <Button sx={FOOTER_SCENE_BUTTONS_SYLE} color="inherit" size='large'
-              href={LINKS.githubRepo} target="_blank" rel="noreferrer"
-            >
-              <GitHubIcon fontSize='large' />
-              GitHub
-            </Button> &nbsp;|
-            <Button sx={FOOTER_SCENE_BUTTONS_SYLE} color="inherit" size='large'
-              href={LINKS.personalWebsite} target="_blank" rel="noreferrer"
-            >
-              Developer
-            </Button>
-          </div>
-          Website Made with MUI, R3F and React
-        </footer>
+        <SceneFooter />
       </div>
     </div>
   )
